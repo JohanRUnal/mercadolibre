@@ -518,3 +518,33 @@ def VIF(df):
     for i in range(len(cols)):
         v = vif(df.to_numpy(),i)
         print('Variance inflation factor for {}: {}'.format(df.columns[i],round(v,2)))
+
+
+
+def bar_plot(df,columns):
+
+    """
+    Create a barplot to compare two columns of a data frame
+    Input: 
+    - df: dataframe with columns to plot
+    - columns: list with columns name to plot
+    """
+    
+    # extract values for columns
+    column1 = df[columns[0]].value_counts()
+    column2 = df[columns[1]].value_counts()
+    
+    # index for xticks
+    indx = [i for i in range(len(column1))]
+    
+    # initialize a figure
+    fig,ax =plt.subplots(1,2,figsize=(15,8))
+    ax[0].bar(indx[:5], column1.values[:5],color='blue')
+    ax[0].set_xticks(indx[:5])
+    ax[0].set_xticklabels(column1.index.to_list()[:5], rotation='vertical');
+    ax[0].set_title(f'#top 5 {columns[0]} categories')
+    
+    ax[1].bar(indx[:5], column2.values[:5],color='r')
+    ax[1].set_xticks(indx[:5])
+    ax[1].set_xticklabels(column2.index.to_list()[:5], rotation='vertical');
+    ax[1].set_title(f'Top 5 {columns[0]}   categories');
