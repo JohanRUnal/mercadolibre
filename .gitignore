@@ -9,3 +9,7 @@ debug.log
 
 #src
 src
+
+# cache
+
+__pycache__
