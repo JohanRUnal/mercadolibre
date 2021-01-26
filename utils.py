@@ -10,9 +10,13 @@ import json
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split,KFold,cross_validate
+from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
+from sklearn.linear_model import Lasso
+from sklearn.metrics import mean_absolute_error as mae
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import accuracy_score
 import operator 
 import re
@@ -318,7 +322,7 @@ def create_undersampled_df(df):
 
 
 
-def best_model(df,test_prop=0.2):
+def best_classifier_model(df,test_prop=0.2):
     """
     function to compare classification models and select the best based on the accuracy score
     
@@ -331,53 +335,59 @@ def best_model(df,test_prop=0.2):
     """
     
     # Split df in X,y
-    X=df.drop(columns=['sold_quantity_range','interval'])
-    y = df[['sold_quantity_range']]
-    
-    
-    #split the data in train,test
-    x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=test_prop,random_state=42)
-    
-    print('x_train shape: ',x_train.shape)
-    print('x_test: ',x_test.shape)
-    
-    
+    if 'sold_quantity_range' in df.columns.to_list():
+    # if we have the variable intervals after a cut of sold quantity in bins
+        X=df.drop(columns=['sold_quantity_range','interval'])
+        y = df['sold_quantity_range']
+    else:
+    # make a simple split
+        X=df.drop(columns=['sold_quantity'])
+        y = df['sold_quantity']
+        
 
 
     # define models to compare:
-    models = {'DecisionTree':DecisionTreeClassifier(),
+    models = {'AdaBoost': AdaBoostClassifier(),
              'RandomForest':RandomForestClassifier()}
     
     # evaluate models and choose the model with min error over test.
     accuracy_scores = {}
     pred_dict ={}
+
+    # kfolds
+    kfolds = KFold(n_splits=3,shuffle=True,random_state=42)
+    scoring = ['accuracy','f1_weighted']
+    reporting_results = []
     
     for name,model in models.items():
         try:
-            model.fit(x_train,y_train['sold_quantity_range'])
-            prediction = model.predict(x_test)
-            accuracy = accuracy_score(y_test,prediction)
-            print(accuracy)
-            print('#'*50)
-            print('accuracy for '+ name + ':',accuracy)
-            accuracy_scores[name]=accuracy
-            pred_dict[name]=prediction
+            clf = model
+            scores = cross_validate(clf,X,y,cv=kfolds,scoring=scoring)
+            reporting_results.append((name, np.mean(scores['test_accuracy']),np.mean(scores['test_f1_weighted'])))
+            mean_accuracy = round(np.abs(np.mean(scores['test_accuracy'])),2)
+            accuracy_scores[name]=mean_accuracy
         except Exception as e:
             print('Warning!:')
-            print(f'problem with model{name}\n')
+            print(f'problem with model: {name}\n')
+            print(e)
             continue
             
     # # get the name of classifier with the max accuracy
     max_accuracy_classifier = max(accuracy_scores.items(),key=operator.itemgetter(1))[0]
     # select and train the estimator with minimun mse
-    best_regressor = models[max_accuracy_classifier]
+    best_clf = models[max_accuracy_classifier]
+    
+    
+    df_report = pd.DataFrame(reporting_results,columns=['Model','test_accuracy','test_f1_weighted'])
+    df_report.set_index(['Model'],inplace=True)
+    
     print('\n')
     print('*'*36)
     print('best model selected:', max_accuracy_classifier)
     print('*'*36)
-    best_regressor.fit(X,y)
-    return best_regressor
-
+    
+    best_clf.fit(X,y)
+    return best_clf,df_report
 
 
 ## Scraper to get the data from categories
@@ -387,6 +397,7 @@ def get_data_by_category(categories_dict):
     Input: 
     - categories_dict: dictionary with the categories available per country.
     Output: 
+    dataframe with the data collected.
 
     """
     countries = categories_dict['Country']
@@ -461,3 +472,49 @@ def get_data_by_category(categories_dict):
                 print('Exception: ',e)
                 continue  
     return df_meli
+
+
+def lasso_model(df):
+    """
+    function to run a lasso regression and create a dataframe without the columns delete by lasso
+    Input: 
+    - df: dataframe
+    Output:
+    - df_suppress: dataframe with the deleted columns  
+    """
+    X = df.drop(columns=['sold_quantity','interval','sold_quantity_range'])
+    y = df[['sold_quantity']]
+     # fast train test split
+    x_train,x_test,y_train,y_test = train_test_split(X,y,random_state=42,test_size=0.2)
+    
+    # create an instance of Lasso
+    lasso = Lasso()
+    lasso.fit(x_train,y_train)
+    # predict
+    y_pred = lasso.predict(x_test)
+    # mae
+    print('Lasso mae : ',mae(y_test,y_pred)*100)
+    print('*'*40)
+    
+    coefs = lasso.coef_
+    columns_to_del = ['interval','sold_quantity_range']
+    for i,col in enumerate(X.columns.to_list()):
+        if coefs[i]==0:
+            columns_to_del.append(col)
+            print(f'supress the column: {col} ')
+    df_suppress = df.drop(columns=columns_to_del)
+    return df_suppress
+
+
+
+# Function to get the VIF factor for the columns of df
+
+def VIF(df):
+    """
+    run variance inflation factor to df
+    """
+    cols = df.columns.to_list()
+    
+    for i in range(len(cols)):
+        v = vif(df.to_numpy(),i)
+        print('Variance inflation factor for {}: {}'.format(df.columns[i],round(v,2)))
