@@ -1,4 +1,3 @@
-# mercadolibre
 <p align="center">
   <img width="320" height="160" src="https://play-lh.googleusercontent.com/vJw7auvtuNBhjdgLBw_V_pfWHqAAkZiZ0ftWuUF_ZTiJUOT0COnJa0iZCHoC_BtSFH4">
 </p>
