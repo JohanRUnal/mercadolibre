@@ -1,6 +1,7 @@
 # mercadolibre
-
-![](https://play-lh.googleusercontent.com/vJw7auvtuNBhjdgLBw_V_pfWHqAAkZiZ0ftWuUF_ZTiJUOT0COnJa0iZCHoC_BtSFH4)
+<p align="center">
+  <img width="320" height="160" src="https://play-lh.googleusercontent.com/vJw7auvtuNBhjdgLBw_V_pfWHqAAkZiZ0ftWuUF_ZTiJUOT0COnJa0iZCHoC_BtSFH4">
+</p>
 
 Mercadolibre is absolutely one of the most important companies of e-commerce in the world. For many years it has been a reference of innovation and still look itself as a "*Startup*", where there are still a lot of work to do, curiously that simple but powerful point of view definitely is a captstone of its philosophy and success!.
 
