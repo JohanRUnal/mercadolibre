@@ -18,8 +18,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import accuracy_score
+from pathlib import Path
 import operator 
-import re
+import re 
+
 
 def currency_converter(currencies_id,countries,original_prices,currency_to_convert='USD'):
     """
