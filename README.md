@@ -16,7 +16,7 @@ In this project we are interested in analyse its great public API called **MELI*
 <img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-yellow"> | <img src="https://img.shields.io/badge/-seaborn-red"> | <img src="https://img.shields.io/badge/-matplotlib-purple">
 
 ### Some conclusions:
-1. In general Adaboost showed a better performance in contrast with traditional regression models to predict the sold quantity variable getting a mae(mean absoulute error) so close to zero.
+1. In general Adaboost showed a better performance in contrast with traditional regression models to predict the sold quantity variable getting a high accuracy, so close to 95%.
 2. Data was taken from the mercadolibre API, so we unknown the "diversity" of the data extracted so that some overfit problems definitely can take place.
 
 
