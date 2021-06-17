@@ -20,7 +20,9 @@ In this project we are interested in analyse its great public API called **MELI*
 2. Data was taken from the mercadolibre API, so we unknown the "diversity" of the data extracted so that some overfit problems definitely can take place.
 
 
-### Future works.
+### Future works:
+
+Try to validate with the API owner the diversity of the data and find other data sources useful to get robust models.
 
 
 
