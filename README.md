@@ -16,7 +16,7 @@ In this project we are interested in analyse its great public API called **MELI*
 <img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-yellow"> | <img src="https://img.shields.io/badge/-seaborn-red"> | <img src="https://img.shields.io/badge/-matplotlib-purple">
 
 ### Some conclusions:
-1. Using a sold quantity range approach showed a better performance in contrast to regression models.  Randorm Forest was the model with the best results (accuracy so close to 0.95).  
+1. Using a "sold quantity range" approach showed a better performance in contrast to regression models.  Randorm Forest was the model with the best results (accuracy so close to 0.95).  
 2. Data was taken from the mercadolibre API, so we unknown the "diversity" of the data extracted so that some overfit problems definitely can take place.
 
 
