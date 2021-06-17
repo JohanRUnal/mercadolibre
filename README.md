@@ -13,6 +13,6 @@ In this project we are interested in analyse its great public API called **MELI*
 - **Modelling stage**: We'll try to create a model that  let us "*predict*" the **sold quantity** of products that belong to different categories.
 
 ## Tools and libraries.
-<img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-green"> | <img src="https://img.shields.io/badge/-seaborn-green"> | <img src="https://img.shields.io/badge/-matplotlib-green">
+<img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-yellow"> | <img src="https://img.shields.io/badge/-seaborn-red"> | <img src="https://img.shields.io/badge/-matplotlib-purple">
 
 
