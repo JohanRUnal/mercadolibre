@@ -22,7 +22,8 @@ In this project we are interested in analyse its great public API called **MELI*
 
 ### Future works:
 
-Try to validate with the API owner the diversity of the data and find other data sources useful to get robust models.
+1. Try to validate with the API owner the diversity of the data and find other data sources useful to get robust models.
+2. Focus on some particular categories like TV's, cellphones and try to play unsupervised models like(HDBSCAN) trying to detect anomalous prices. 
 
 
 
