@@ -12,6 +12,9 @@ In this project we are interested in analyse its great public API called **MELI*
 - **Exploratory analysis**: We are interested in the extraction of insights, patterns and anomalies.
 - **Modelling stage**: We'll try to create a model that  let us "*predict*" the **sold quantity** of products that belong to different categories.
 
+## Languages and Tools.
+<img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-R-critical"> | <img src="https://img.shields.io/badge/-Tensorflow-orange"> | <img src="https://img.shields.io/badge/-Tableau-yellow"> | <img src="https://img.shields.io/badge/-MySQL-lightgrey"> | <img src="https://img.shields.io/badge/-Github-informational"> | <img src="https://img.shields.io/badge/-Terminal-orange">
+
 
 
 
