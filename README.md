@@ -12,8 +12,6 @@ In this project we are interested in analyse its great public API called **MELI*
 - **Exploratory analysis**: We are interested in the extraction of insights, patterns and anomalies.
 - **Modelling stage**: We'll try to create a model that  let us "*predict*" the **sold quantity** of products that belong to different categories.
 
-### Tools and libraries.
-<img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-yellow"> | <img src="https://img.shields.io/badge/-seaborn-red"> | <img src="https://img.shields.io/badge/-matplotlib-purple">
 
 ### Some conclusions:
 1. Using a "sold quantity range" approach showed a better performance in contrast to regression models.  Randorm Forest was the model with the best results (accuracy so close to 0.95).  
@@ -24,6 +22,9 @@ In this project we are interested in analyse its great public API called **MELI*
 
 1. Try to validate with the API owner the diversity of the data and find other data sources useful to get robust models.
 2. Focus on some particular categories like TV's, cellphones and try to play unsupervised models like (HDBSCAN) trying to detect products with suspicious anomalous prices. 
+
+### Tools and libraries.
+<img src="https://img.shields.io/badge/-Python-brightgreen"> | <img src="https://img.shields.io/badge/-sklear-green"> | <img src="https://img.shields.io/badge/-pandas-yellow"> | <img src="https://img.shields.io/badge/-seaborn-red"> | <img src="https://img.shields.io/badge/-matplotlib-purple">
 
 
 
